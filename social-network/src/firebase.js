@@ -1,4 +1,6 @@
-var firebaseConfig = {
+import firebase from "firebase";
+
+const firebaseConfig = {
   apiKey: "AIzaSyAhOjpG45aKliUa_n_lJWyLc2NyhWm3P84",
   authDomain: "react-social-network-322fb.firebaseapp.com",
   projectId: "react-social-network-322fb",
@@ -7,3 +9,12 @@ var firebaseConfig = {
   appId: "1:690571250637:web:43b1a812a7dfbb40de5284",
   measurementId: "G-WPF8SJT06K",
 };
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
+const storage = firebase.storage();
+const provider = new firebase.auth.GoogleAuthProvider();
+
+export { db, auth, provider, storage };
