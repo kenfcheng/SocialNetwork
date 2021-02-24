@@ -1,0 +1,31 @@
+import { auth, provider } from "../firebase";
+
+// Handles Google Logging In
+export const signInWithGoogle = async () => {
+  let user;
+  await auth
+    .signInWithPopup(provider)
+    .then((res) => {
+      console.log(res.user);
+      user = res.user;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+
+  return user;
+};
+
+// Handles Google Logout
+// Reference @ 40:00
+export const logout = () => {
+    let logout_success;
+    await auth.signOut()
+    .then(() => {
+        logout_success = true;
+    }).catch((error) => {
+        console.log(error.message);
+    })
+
+return logout_success;
+};
