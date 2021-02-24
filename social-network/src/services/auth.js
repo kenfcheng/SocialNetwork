@@ -18,14 +18,16 @@ export const signInWithGoogle = async () => {
 
 // Handles Google Logout
 // Reference @ 40:00
-export const logout = () => {
-    let logout_success;
-    await auth.signOut()
+export const logout = async () => {
+  let logout_success;
+  await auth
+    .signOut()
     .then(() => {
-        logout_success = true;
-    }).catch((error) => {
-        console.log(error.message);
+      logout_success = true;
     })
+    .catch((error) => {
+      console.log(error.message);
+    });
 
-return logout_success;
+  return logout_success;
 };
