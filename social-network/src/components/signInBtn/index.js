@@ -1,17 +1,18 @@
-import React from "react";
-import { signInWithGoogle } from "../../services/auth";
+import React, { useContext } from "react";
 import "./style.css";
+import { signInWithGoogle } from "../../services/auth";
+import { UserContext } from "../../contexts/user";
 
-export default function signInBtn() {
-  const [user, setUser] = useState();
+export default function SignInBtn() {
+  const [user, setUser] = useContext(UserContext).user;
 
   const signInBtnClick = async () => {
-    let user = await signInWithGoogle();
-    if (user) setUser(userBySignIn);
+    let userBySignIn = await signInWithGoogle();
+    if (userBySignIn) setUser(userBySignIn);
   };
 
   return (
-    <div className="signInBtn">
+    <div className="signInBtn" onClick={signInBtnClick}>
       <p>Sign in with Google</p>
     </div>
   );
