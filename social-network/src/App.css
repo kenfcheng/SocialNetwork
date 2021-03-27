@@ -1,3 +1,16 @@
 * {
   margin: 0;
 }
+
+/* Keeps the logo in place prevents it from stretching as App is developed */
+.app_header {
+  object-fit: contain;
+  background-color: white;
+  padding: 20px;
+  border-bottom: 1px solid rgb(151, 7, 132);
+}
+
+.app {
+  background-color: lightgray;
+  height: 100vh;
+}

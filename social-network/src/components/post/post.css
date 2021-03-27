@@ -1,0 +1,9 @@
+.post_image {
+  width: 100%;
+  object-fit: contain;
+}
+
+/* font-weight:normal changes the h4 from bold to normal text */
+.post_text {
+  font-weight: normal;
+}
