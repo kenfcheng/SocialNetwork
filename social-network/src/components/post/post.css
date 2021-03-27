@@ -1,3 +1,8 @@
+.post {
+  max-width: 500px;
+  background-color: white;
+}
+
 .post_image {
   width: 100%;
   object-fit: contain;
@@ -6,4 +11,16 @@
 /* font-weight:normal changes the h4 from bold to normal text */
 .post_text {
   font-weight: normal;
+  padding: 20px;
+}
+
+/* display: flex puts two elements in a container into a single row */
+.post_header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.post_avatar {
+  margin-right: 10px;
 }

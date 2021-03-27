@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Post from "./components/post/post";
+import Post from "./components/post/post.jsx";
 
 function App() {
   return (
