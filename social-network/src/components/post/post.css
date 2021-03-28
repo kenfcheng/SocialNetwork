@@ -1,11 +1,16 @@
 .post {
   max-width: 500px;
   background-color: white;
+  border: 1px solid rgb(151, 7, 132);
+  /* Margin-bottom Puts gaps between the posted images */
+  margin-bottom: 45px;
 }
 
 .post_image {
   width: 100%;
   object-fit: contain;
+  border-top: 1px solid rgb(151, 7, 132);
+  border-bottom: 1px solid rgb(151, 7, 132);
 }
 
 /* font-weight:normal changes the h4 from bold to normal text */
