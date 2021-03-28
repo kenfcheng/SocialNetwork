@@ -19,7 +19,7 @@ function post({username, caption, imageURL}) {
  {/* image */}
       <img
         className="post_image"
-        src="https://bigseventravel.com/wp-content/uploads/2019/10/Screenshot-2019-10-11-at-13.33.07.png"
+        src={imageURL}
       />
      {/* username & caption */}
       <h4 className="post_text">
