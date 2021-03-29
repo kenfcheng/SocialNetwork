@@ -10,7 +10,7 @@ function post({username, caption, imageURL}) {
         {" "}
         <Avatar
           className="post_avatar"
-          alt="KenUser"
+          alt="User"
           src="/static/images/avatar/1.jpg"
         />
         <h3>{username}</h3>

@@ -4,26 +4,16 @@ import Post from "./components/post/post.jsx";
 import { db } from "./firebase";
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      username: "TesterA",
-      caption: "I WANT A PIZZA!",
-      imageURL:
-        "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_677,q_85,w_1280/v1/clients/raleigh/306f35b4_ca45_41cd_8786_c05dfd9ed4e8_4899f218-2953-46e3-a58c-a5f8f36ed04f.jpg",
-    },
-    {
-      username: "TesterA",
-      caption: "I WANT A PIZZA!",
-      imageURL:
-        "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_677,q_85,w_1280/v1/clients/raleigh/306f35b4_ca45_41cd_8786_c05dfd9ed4e8_4899f218-2953-46e3-a58c-a5f8f36ed04f.jpg",
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
 
   // useEffect runs a piece of code based on a specific condition.
   useEffect(() => {
     // code runs here!
-    db.collection("posts").onSnapshot((snapshot) => {});
+    db.collection("posts").onSnapshot((snapshot) => {
+      setPosts(snapshot.docs.map((doc) => doc.data()));
+    });
     // every new posts made, snapshot will send it straight to db as soon as photo is taken.
+    // real timne connection to firebase. will update live for updated or new posts.
   }, []);
 
   return (
@@ -46,21 +36,6 @@ function App() {
           imageURL={post.imageURL}
         />
       ))}
-      <Post
-        username="TestingUser"
-        caption="Can You see this pizza?"
-        imageURL="https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_677,q_85,w_1280/v1/clients/raleigh/306f35b4_ca45_41cd_8786_c05dfd9ed4e8_4899f218-2953-46e3-a58c-a5f8f36ed04f.jpg"
-      />
-      <Post
-        username="Tester2"
-        caption="It's nice but I got this sandwhich"
-        imageURL="https://lh3.googleusercontent.com/proxy/uEAE9s0KUggjIYp2yme6XRasYGNW1S1NBOGJCs653r2bBxqjx8Q4gO20lRyHtwJILEQPxnQYUmWS3NGqR0LHrQ7zCyIjsSlbUqmsGiyzmP346H5ctVqCZIWw_w"
-      />
-      <Post
-        username="Tester3"
-        caption="Me too!"
-        imageURL="https://lh3.googleusercontent.com/proxy/uEAE9s0KUggjIYp2yme6XRasYGNW1S1NBOGJCs653r2bBxqjx8Q4gO20lRyHtwJILEQPxnQYUmWS3NGqR0LHrQ7zCyIjsSlbUqmsGiyzmP346H5ctVqCZIWw_w"
-      />
     </div>
   );
 }
