@@ -46,6 +46,28 @@ function App() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // user has logged in
+        console.log(authUser);
+        setUser(authUser);
+
+        if (authUser.displayName) {
+        } else {
+          // if we just created someone
+          return authUser.updateProfile({ displayName: username });
+        }
+        // don't update username
+      } else {
+        setUser(null);
+        // user has logged out
+      }
+    });
+  }, [user, username]);
+
   // useEffect runs a piece of code based on a specific condition.
   useEffect(() => {
     // code runs here!
@@ -61,9 +83,10 @@ function App() {
     // prevents unwanted refresh when signing up
     event.preventDefault();
 
-    // sets up/handles user authentication
+    // creates user using email and password from state.
     auth
       .createUserWithEmailAndPassword(email, password)
+
       .catch((error) => alert(error.message));
   };
 
