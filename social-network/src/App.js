@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import "./App.css";
 import Post from "./components/post/post.jsx";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
 import { Button, Input } from "@material-ui/core";
 
 // Styling for Modal
@@ -57,19 +57,29 @@ function App() {
   }, []);
 
   // Handles sign up event.
-  const signUp = (event) => {};
+  const signUp = (event) => {
+    // prevents unwanted refresh when signing up
+    event.preventDefault();
+
+    // sets up/handles user authentication
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <div className="app">
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
-          <center>
-            {/* Instagram logo Placeholder until I get a real logo*/}
-            <img
-              className="app_headerImage"
-              src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
-              alt="logo"
-            />
+          <form className="app_signUp">
+            <center>
+              {/* Instagram logo Placeholder until I get a real logo*/}
+              <img
+                className="app_headerImage"
+                src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
+                alt="logo"
+              />
+            </center>
             <Input
               placeholder="username"
               type="text"
@@ -90,7 +100,10 @@ function App() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </center>
+            <Button type="submit" onClick={signUp}>
+              Sign Up
+            </Button>
+          </form>
         </div>
       </Modal>
 

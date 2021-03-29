@@ -13,3 +13,9 @@
 .app {
   background-color: lightgray;
 }
+
+.app_signUp {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
