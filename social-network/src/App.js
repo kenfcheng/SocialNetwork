@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import "./App.css";
 import Post from "./components/post/post.jsx";
 import { db } from "./firebase";
+import { Button, Input } from "@material-ui/core";
 
 // Styling for Modal
 
@@ -40,6 +41,11 @@ function App() {
   // Open state for when Modal is open
   const [open, setOpen] = useState(false);
 
+  // States for Sign Up
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
   // useEffect runs a piece of code based on a specific condition.
   useEffect(() => {
     // code runs here!
@@ -50,13 +56,44 @@ function App() {
     // real timne connection to firebase. will update live for updated or new posts.
   }, []);
 
+  // Handles sign up event.
+  const signUp = (event) => {};
+
   return (
     <div className="app">
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
-          <h2>This is a Modal</h2>
+          <center>
+            {/* Instagram logo Placeholder until I get a real logo*/}
+            <img
+              className="app_headerImage"
+              src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
+              alt="logo"
+            />
+            <Input
+              placeholder="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+
+            <Input
+              placeholder="email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <Input
+              placeholder="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </center>
         </div>
       </Modal>
+
       <div className="app_header">
         {/* Instagram logo Placeholder until I get a real logo*/}
         <img
@@ -65,6 +102,10 @@ function App() {
           alt="logo"
         />
       </div>
+
+      {/* Sign Up Button */}
+      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+
       <h1>Social Media Testing</h1>
 
       {/* goes through posts hooks and returns the individual bits of information */}
