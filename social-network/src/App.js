@@ -49,7 +49,8 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    // backend listener for responses on the front end
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         // user has logged in
         console.log(authUser);
@@ -66,6 +67,10 @@ function App() {
         // user has logged out
       }
     });
+    return () => {
+      // performs cleanup actions
+      unsubscribe();
+    };
   }, [user, username]);
 
   // useEffect runs a piece of code based on a specific condition.
@@ -86,7 +91,11 @@ function App() {
     // creates user using email and password from state.
     auth
       .createUserWithEmailAndPassword(email, password)
-
+      .then((authUser) => {
+        return authUser.user.updateProfile({
+          displayName: username,
+        });
+      })
       .catch((error) => alert(error.message));
   };
 
@@ -139,8 +148,14 @@ function App() {
         />
       </div>
 
-      {/* Sign Up Button */}
-      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+      {user ? (
+        // Logout Btn
+        <Button onClick={() => auth.signOut()}>Logout</Button>
+      ) : (
+        // ^ Indicates "or"
+        // Signup button
+        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+      )}
 
       <h1>Social Media Testing</h1>
 
