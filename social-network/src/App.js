@@ -97,6 +97,20 @@ function App() {
         });
       })
       .catch((error) => alert(error.message));
+
+    // Modal closes once user is signed up
+    setOpen(false);
+  };
+
+  // Sign In function
+  const signIn = (event) => {
+    event.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .catch((error) => alert(error.message));
+
+    // Modal Closes once user signs in
+    setOpenSignIn(false);
   };
 
   return (
@@ -141,8 +155,8 @@ function App() {
 
       {/* Sign In Modal */}
       <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
-        <div>
-          <form>
+        <div style={modalStyle} className={classes.paper}>
+          <form className="app_signUp">
             <center>
               {/* Instagram logo Placeholder until I get a real logo*/}
               <img
