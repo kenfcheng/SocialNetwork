@@ -40,12 +40,12 @@ function App() {
 
   // Open state for when Modal is open
   const [open, setOpen] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);
 
   // States for Sign Up
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -139,6 +139,39 @@ function App() {
         </div>
       </Modal>
 
+      {/* Sign In Modal */}
+      <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
+        <div>
+          <form>
+            <center>
+              {/* Instagram logo Placeholder until I get a real logo*/}
+              <img
+                className="app_headerImage"
+                src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
+                alt="logo"
+              />
+
+              <Input
+                placeholder="email"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <Input
+                placeholder="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button type="submit" onClick={signIn}>
+                Login
+              </Button>
+            </center>
+          </form>
+        </div>
+      </Modal>
+
       <div className="app_header">
         {/* Instagram logo Placeholder until I get a real logo*/}
         <img
@@ -152,9 +185,10 @@ function App() {
         // Logout Btn
         <Button onClick={() => auth.signOut()}>Logout</Button>
       ) : (
-        // ^ Indicates "or"
-        // Signup button
-        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        <div className="app_loginContainer">
+          <Button onClick={() => setOpenSignIn(true)}>Login</Button>
+          <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        </div>
       )}
 
       <h1>Social Media Testing</h1>
