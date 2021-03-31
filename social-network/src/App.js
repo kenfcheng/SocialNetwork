@@ -114,7 +114,7 @@ function App() {
 
   return (
     <div className="app">
-      {/*Image Upload goes here*/}
+      <ImageUpload />
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
