@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
-
 import "./App.css";
 import Post from "./components/post/post.jsx";
 import { auth, db } from "./firebase";
 import { Button, Input } from "@material-ui/core";
-
+import ImageUpload from "../src/components/imageUpload/imageUpload";
 // Styling for Modal
 
 function getModalStyle() {
@@ -115,6 +114,8 @@ function App() {
 
   return (
     <div className="app">
+      {/*Image Upload goes here*/}
+
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app_signUp">
