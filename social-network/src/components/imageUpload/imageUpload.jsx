@@ -17,9 +17,21 @@ const handleChange = (e) => {
 };
 
 const handleUpload = () => {
-const uploadTask = storage.ref(`images/${image.name}`).put{image};
+const uploadTask = storage.ref(`images/${image.name}`).put(image);
+
+// Progress Bar
+uploadTask.on(
+    "state_changed", (snapshot) => {
+    // progress function
+    const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        )
+        setProgress(progress);
 }
-    return (
+)
+}
+    
+return (
     <div>
             <h1>Image Upload Render</h1>
              {/*We need: */}
