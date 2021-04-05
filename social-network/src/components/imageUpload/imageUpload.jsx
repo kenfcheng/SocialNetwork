@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import { Button } from "@material-ui/core";
 import {storage, db} from '../../firebase';
+import { Children } from 'react';
+import firebase from 'firebase';
 
-function ImageUpload() {
+function ImageUpload({username}) {
 const [caption, setCaption] = useState('');
 const [url, setUrl] =useState('');
 const [image, setImage] =useState(null);
 // progress bar
 const [progress, setProgress] = useState('');
+
 
 // File picker
 const handleChange = (e) => {
@@ -22,11 +25,32 @@ const uploadTask = storage.ref(`images/${image.name}`).put(image);
 // Progress Bar
 uploadTask.on(
     "state_changed", (snapshot) => {
-    // progress function
+    // progress function sets from 0 - 100 throwing a visual representation.
     const progress = Math.round(
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         )
         setProgress(progress);
+},
+(error) => {
+    // Error function throws an error alert if upload is not working.
+    console.log(error);
+    alert(error.message);
+},
+() => {
+    // complete function indicates when download is complete.
+storage.ref('images')
+.child(image.name)
+// returns download linkl
+.getDownloadURL()
+.then(url => {
+    // post image inside database
+    db.collection("posts").add({
+       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+       caption: caption,
+       imageURL: url,
+       username: username
+    })
+})
 }
 )
 }

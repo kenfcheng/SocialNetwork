@@ -31,10 +31,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const classes = useStyles();
   // Gets Modal style
   const [modalStyle] = useState(getModalStyle);
-  const classes = useStyles();
-
   const [posts, setPosts] = useState([]);
 
   // Open state for when Modal is open
@@ -45,7 +44,7 @@ function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     // backend listener for responses on the front end
@@ -114,7 +113,12 @@ function App() {
 
   return (
     <div className="app">
-      <ImageUpload />
+      {/* alerts users that they must be signed in to upload post */}
+      {user?.displayName ? (
+        <ImageUpload username={username.displayName} />
+      ) : (
+        <h3>Please Login to Upload</h3>
+      )}
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
