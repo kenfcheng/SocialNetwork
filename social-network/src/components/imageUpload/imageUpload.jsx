@@ -8,8 +8,10 @@ function ImageUpload({username}) {
 const [caption, setCaption] = useState('');
 const [url, setUrl] =useState('');
 const [image, setImage] =useState(null);
+
+
 // progress bar
-const [progress, setProgress] = useState('');
+const [progress, setProgress] = useState(0);
 
 
 // File picker
@@ -37,10 +39,10 @@ uploadTask.on(
     alert(error.message);
 },
 () => {
-    // complete function indicates when download is complete.
+    // upload complete function indicates when download is complete.
 storage.ref('images')
 .child(image.name)
-// returns download linkl
+// returns download link
 .getDownloadURL()
 .then(url => {
     // post image inside database
@@ -49,7 +51,12 @@ storage.ref('images')
        caption: caption,
        imageURL: url,
        username: username
-    })
+    });
+    
+    // Resets progress settings back to 0
+    setProgress(0);
+    setCaption("");
+    setImage(null);
 })
 }
 )
@@ -62,7 +69,8 @@ return (
       {/* Caption Input */}
       {/* File Picker*/}
       {/* 'Post' Button */}
-
+      {/* puts Max progress to 100 */}
+      <progress value={progress} max="100"/>
       <input type='text' placeholder='enter caption...' onChange={event => setCaption(event.target.value)} value={caption}/>
       <input type='file' onChange={handleChange}/>
 

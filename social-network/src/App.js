@@ -114,8 +114,9 @@ function App() {
   return (
     <div className="app">
       {/* alerts users that they must be signed in to upload post */}
+      {/* ? is an optional that works around user.displayName being undefined */}
       {user?.displayName ? (
-        <ImageUpload username={username.displayName} />
+        <ImageUpload username={user.displayName} />
       ) : (
         <h3>Please Login to Upload</h3>
       )}
