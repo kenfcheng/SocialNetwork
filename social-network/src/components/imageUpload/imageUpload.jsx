@@ -71,7 +71,7 @@ return (
       {/* File Picker*/}
       {/* 'Post' Button */}
       {/* puts Max progress to 100 */}
-      <progress value={progress} max="100"/>
+      <progress className="imageUpload__progress" value={progress} max="100"/>
       <input type='text' placeholder='enter caption...' onChange={event => setCaption(event.target.value)} value={caption}/>
       <input type='file' onChange={handleChange}/>
 
