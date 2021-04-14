@@ -209,15 +209,18 @@ function App() {
 
       <h1>Social Media Testing</h1>
 
-      {/* goes through posts hooks and returns the individual bits of information */}
-      {posts.map(({ id, post }) => (
-        <Post
-          key={id}
-          username={post.username}
-          caption={post.caption}
-          imageURL={post.imageURL}
-        />
-      ))}
+      <div className="app__posts">
+        {/* goes through posts hooks and returns the individual bits of information */}
+        {posts.map(({ id, post }) => (
+          <Post
+            key={id}
+            username={post.username}
+            caption={post.caption}
+            imageURL={post.imageURL}
+          />
+        ))}
+      </div>
+
       {/* alerts users that they must be signed in to upload post */}
       {/* ? is an optional that works around user.displayName being undefined */}
       {user?.displayName ? (
