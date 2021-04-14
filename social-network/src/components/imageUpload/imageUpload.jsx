@@ -3,6 +3,7 @@ import { Button } from "@material-ui/core";
 import {storage, db} from '../../firebase';
 import { Children } from 'react';
 import firebase from 'firebase';
+import './imageUpload.css'
 
 function ImageUpload({username}) {
 const [caption, setCaption] = useState('');
@@ -53,7 +54,7 @@ storage.ref('images')
        username: username
     });
     
-    // Resets progress settings back to 0
+    // Resets progress settings back to 0 and default settings.
     setProgress(0);
     setCaption("");
     setImage(null);
@@ -63,8 +64,8 @@ storage.ref('images')
 }
     
 return (
-    <div>
-            <h1>Image Upload Render</h1>
+    <div className="imageUpload">
+             <h1>Image Upload Render</h1>
              {/*We need: */}
       {/* Caption Input */}
       {/* File Picker*/}

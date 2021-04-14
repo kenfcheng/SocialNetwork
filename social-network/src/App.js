@@ -74,9 +74,14 @@ function App() {
   // useEffect runs a piece of code based on a specific condition.
   useEffect(() => {
     // code runs here!
-    db.collection("posts").onSnapshot((snapshot) => {
-      setPosts(snapshot.docs.map((doc) => ({ id: doc.id, post: doc.data() })));
-    });
+    // orders placement of photos based on timestamp in descending order.
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setPosts(
+          snapshot.docs.map((doc) => ({ id: doc.id, post: doc.data() }))
+        );
+      });
     // every new posts made, snapshot will send it straight to db as soon as photo is taken.
     // real timne connection to firebase. will update live for updated or new posts.
   }, []);
@@ -113,14 +118,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* alerts users that they must be signed in to upload post */}
-      {/* ? is an optional that works around user.displayName being undefined */}
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Please Login to Upload</h3>
-      )}
-
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app_signUp">
@@ -222,6 +219,13 @@ function App() {
           imageURL={post.imageURL}
         />
       ))}
+      {/* alerts users that they must be signed in to upload post */}
+      {/* ? is an optional that works around user.displayName being undefined */}
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Please Login to Upload</h3>
+      )}
     </div>
   );
 }
