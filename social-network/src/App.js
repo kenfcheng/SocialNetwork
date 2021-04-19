@@ -6,8 +6,9 @@ import Post from "./components/post/post.jsx";
 import { auth, db } from "./firebase";
 import { Button, Input } from "@material-ui/core";
 import ImageUpload from "../src/components/imageUpload/imageUpload";
-// Styling for Modal
+import InstagramEmbed from "react-instagram-embed";
 
+// Styles Modal
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -210,15 +211,33 @@ function App() {
       <h1>Social Media Testing</h1>
 
       <div className="app__posts">
-        {/* goes through posts hooks and returns the individual bits of information */}
-        {posts.map(({ id, post }) => (
-          <Post
-            key={id}
-            username={post.username}
-            caption={post.caption}
-            imageURL={post.imageURL}
+        <div className="app__postsLeft">
+          {/* goes through posts hooks and returns the individual bits of information */}
+          {posts.map(({ id, post }) => (
+            <Post
+              key={id}
+              username={post.username}
+              caption={post.caption}
+              imageURL={post.imageURL}
+            />
+          ))}
+        </div>
+
+        <div className="app_postsRight">
+          {/* InstagramEmbed to embed on the right */}
+          <InstagramEmbed
+            url="https://instagr.am/p/Zw9o4/"
+            maxWidth={320}
+            hideCaption={false}
+            containerTagName="div"
+            protocol=""
+            injectScript
+            onLoading={() => {}}
+            onSuccess={() => {}}
+            onAfterRender={() => {}}
+            onFailure={() => {}}
           />
-        ))}
+        </div>
       </div>
 
       {/* alerts users that they must be signed in to upload post */}

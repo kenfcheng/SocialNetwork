@@ -13,7 +13,7 @@
 }
 
 .app {
-  background-color: lightgray;
+  background-color: white;
 }
 
 .app_signUp {
@@ -28,4 +28,8 @@
 
 .app__posts {
   padding: 20px;
+}
+
+.app__postsRight {
+  margin-left: 20px;
 }
