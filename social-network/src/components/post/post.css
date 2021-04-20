@@ -29,3 +29,24 @@
 .post_avatar {
   margin-right: 10px;
 }
+
+.post__commentBox {
+  display: flex;
+  margin-top: 10px;
+}
+
+/* When you have two children classNames under a parent className, you can set size priority by assigning 1 or 0 */
+.post__input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-top: 1px solid lightgray;
+}
+
+.post__button {
+  flex: 0;
+  color: lightgreen;
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid lightgray;
+}
